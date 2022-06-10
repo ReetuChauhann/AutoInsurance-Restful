@@ -58,7 +58,7 @@ public class CompanyServiceImpl implements CompanyService {
 	@Override
 	public List<Policy> getPoliciesByCategory(String category) {
 		// TODO Auto-generated method stub
-		return companyRepo.getPolicies(category);
+		return companyRepo.getPoliciesByCategory(category);
 	}
 
 	@Override

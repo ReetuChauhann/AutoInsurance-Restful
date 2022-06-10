@@ -22,22 +22,22 @@ public class CompanyRepo {
 	
 	public String addCompany(Company c){
 		try {
-			String query="insert into companies values(?,?,?,?,?,?,?)";
-			int x=jdbcTemplate.update(query,new Object[] {c.getEmail(),c.getName(),c.getRegistration(),c.getPhone(),c.getPassword(),c.getAddress(),c.getStatus()});
+			String query="insert into companies(email,name,registration,phone,status,address,password) values(?,?,?,?,?,?,?)";
+			int x=jdbcTemplate.update(query,new Object[] {c.getEmail(),c.getName(),c.getRegistration(),c.getPhone(), c.getStatus(), c.getAddress(), c.getPassword()});
 			if(x!=0){
 			return "success";
 			}else {
 			   return	"already";
 			}
 		}catch(Exception ex) {
-			//ex.printStackTrace();
+			ex.printStackTrace();
 			return "already";
 		}
 	}
 	
 	public String addPolicy(Policy p){
 		try {
-			String query="insert into policies values(?,?,?,?,?,?)";
+			String query="insert into policies(pname,amount,category,description,email,cname) values(?,?,?,?,?,?)";
 			int x=jdbcTemplate.update(query,new Object[] {p.getPname(),p.getAmount(),p.getCategory(),p.getDescription(),p.getEmail(),p.getCname()});
 			if(x!=0){
 				return "success";
@@ -46,7 +46,7 @@ public class CompanyRepo {
 				   return	"failed";
 				}
 			}catch(Exception ex) {
-			//ex.printStackTrace();
+			ex.printStackTrace();
 			return "failed";
 		}
 	}
@@ -120,6 +120,7 @@ public class CompanyRepo {
 			List<Policy> p= jdbcTemplate.query(query,new DataMapper(),new Object[] {category});
 			return p;
 		}catch(EmptyResultDataAccessException ex) {
+			ex.printStackTrace();
 			return null;
 		}
 	}

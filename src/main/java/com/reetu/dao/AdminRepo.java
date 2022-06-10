@@ -25,11 +25,12 @@ public class AdminRepo {
 			}
 		}
 		try {
-			final String query ="select * from admin where aid=? and password=?";
+			final String query ="select name from admin where aid=? and password=?";
 			String r=(String) jdbcTemplate.queryForObject(query,new AdminMapper(),new Object[] {aid,password});
+			//System.out.println(r);
 			return r;
 		}catch(EmptyResultDataAccessException ex) {
-			return null;
+			return "Notfound";
 		}
 	}
 	
@@ -61,8 +62,8 @@ public class AdminRepo {
 			
 			return "success";
 		}catch(Exception ex) {
-			//ex.printStackTrace();
-			return "Not Found";
+			ex.printStackTrace();
+			return "failed";
 		}
 	}
 	

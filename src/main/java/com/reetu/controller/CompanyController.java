@@ -44,7 +44,7 @@ public class CompanyController {
 		if(r.equalsIgnoreCase("success")) {
 			return new ResponseEntity<String>(p.getPname()+" is Added Successfully!", HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>(p.getPname()+" insertion failed!", HttpStatus.OK);
+			return new ResponseEntity<String>(p.getPname()+" insertion failed!", HttpStatus.NOT_MODIFIED);
 		}
 	}
 	
@@ -77,7 +77,7 @@ public class CompanyController {
 	
 	
 	@GetMapping(value = "/getPoliciesByCategory/{category}")
-	public List<Policy> getPoliciesByCategory(@PathVariable String category){
+	public List<Policy> getPoliciesByCategory(@PathVariable("category") String category){
 		List<Policy> policies=cs.getPoliciesByCategory(category);
 		return policies;
 	}

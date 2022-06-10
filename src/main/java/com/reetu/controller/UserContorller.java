@@ -32,7 +32,7 @@ public class UserContorller {
 		if(r.equalsIgnoreCase("success")) {
 			return new ResponseEntity<String>(u.getName()+" is Registered Successfully!", HttpStatus.OK);
 		}else {
-			return new ResponseEntity<String>(u.getName()+" is Already Exist!", HttpStatus.OK);
+			return new ResponseEntity<String>(u.getName()+" is Already Exist!", HttpStatus.NOT_MODIFIED);
 		}
 	}
 	

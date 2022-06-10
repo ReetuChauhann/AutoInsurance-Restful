@@ -26,10 +26,10 @@ public class AdminController {
 	@GetMapping(value = "/adminLogin/{aid}/{password}")
 	public ResponseEntity<String> checkAdminLogin(@PathVariable String aid, @PathVariable String password) {
 		String r=As.checkAdminLogin(aid, password);
-		if(r!=null)
+		if(!r.equals("Notfound"))
 			return new ResponseEntity<String>(r, HttpStatus.OK);
 		else
-			return new ResponseEntity<String>("NotFound", HttpStatus.OK);
+			return new ResponseEntity<String>(r, HttpStatus.NOT_MODIFIED);
 	}
 	
 	
@@ -40,9 +40,13 @@ public class AdminController {
 	}
 	
 	
-	@PutMapping(value = "/changeStatus/{email}/{status}")
-	public ResponseEntity<String> changeStatus(@PathVariable String email,@PathVariable String status){
+	@PutMapping(value = "/ChangeStatus/{email}/{status}")
+	public ResponseEntity<String> changeStatus(@PathVariable("email") String email,@PathVariable("status") String status){
 		String r=As.changeStatus(email,status);
+		if(r.equals("success")) {
 		return new ResponseEntity<String>(r, HttpStatus.OK);
+		}else {
+			return new ResponseEntity<String>(r, HttpStatus.NOT_MODIFIED);
+		}
 	}
 }

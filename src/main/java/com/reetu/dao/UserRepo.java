@@ -21,7 +21,7 @@ public class UserRepo {
 	
 	public boolean ConfirmPurchase(int pid,String c_email,String email,String v_no,String e_no){
 		class DataMapper implements RowMapper{
-			public String mapRow(ResultSet rs,int rowNum)throws SQLException{
+			public String mapRow(ResultSet rs,int rowNum) throws SQLException{
 				return 	rs.getString("v_no");
 			}
 		}
@@ -35,7 +35,7 @@ public class UserRepo {
 				jdbcTemplate.update(query,new Object[] {pid,c_email,email,v_no,e_no});
 				return true;
 			}catch(Exception e) {
-				//ex.printStackTrace();
+				ex.printStackTrace();
 				return false;
 			}
 		}
@@ -52,6 +52,7 @@ public class UserRepo {
 				policy_order.put("v_no", rs.getString("v_no"));
 				policy_order.put("e_no", rs.getString("e_no"));
 				policy_order.put("c_date", rs.getDate("c_date"));
+				policy_order.put("c_email", rs.getString("c_email"));
 				return 	policy_order;
 			}
 		}
@@ -71,7 +72,7 @@ public class UserRepo {
 			
 			return "success";
 		}catch(Exception ex) {
-			//ex.printStackTrace();
+			ex.printStackTrace();
 			return "already";
 		}
 	}
